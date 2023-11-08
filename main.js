@@ -15,4 +15,39 @@ var dino = {
     }
 };
 
-dino.draw();
+class Cactus {
+    constructor() {
+        this.x = canvas.width;
+        this.y = 200;
+        this.width = 50;
+        this.height = 50;
+    }
+
+    draw() {
+        ctx.fillStyle = 'red';
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+    }
+}
+
+var cactusObstacles = [];
+var timer = 0;
+
+function update() {
+    requestAnimationFrame(update);
+    timer++;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (timer % 120 === 0) {
+        var cactus = new Cactus();
+        cactusObstacles.push(cactus);
+    }
+
+    cactusObstacles.forEach((a) => {
+        a.x--;
+        a.draw();
+    });
+
+    dino.draw();
+}
+
+update();
